@@ -59,7 +59,7 @@ function addToDo(toDo, id, done, trash) {
                     </li>`;
 	list.insertAdjacentHTML('beforeend', newItem);
 }
-// add item
+// add item by Enter
 document.addEventListener('keyup', () => {
 	if (event.keyCode == 13) {
 		const toDo = input.value;
@@ -76,6 +76,23 @@ document.addEventListener('keyup', () => {
 			// add item to localstorage, this code must be added where the itemList array is updated
 			localStorage.setItem('TODO', JSON.stringify(itemsList));
 		}
+	}
+});
+// add item by Button
+addButton.addEventListener('click', () => {
+	const toDo = input.value;
+	if (toDo) {
+		addToDo(toDo, id);
+		itemsList.push({
+			name: toDo,
+			id: id,
+			done: false,
+			trash: false
+		});
+		input.value = '';
+		id++;
+		// add item to localstorage, this code must be added where the itemList array is updated
+		localStorage.setItem('TODO', JSON.stringify(itemsList));
 	}
 });
 
